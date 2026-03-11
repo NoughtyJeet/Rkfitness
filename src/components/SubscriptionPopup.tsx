@@ -37,13 +37,17 @@ export default function SubscriptionPopup() {
     setError(null);
     
     try {
-      // For now, simply saving the lead to local storage just to simulate success if no Supabase table exists.
-      // Ideally, you would create a 'leads' or 'subscribers' table in Supabase:
-      // const { error } = await supabase.from('leads').insert([{ email }]);
-      // if (error) throw error;
-      
-      // Simulate network request
-      await new Promise(resolve => setTimeout(resolve, 800));
+      // Save the lead to Supabase
+      const { error: insertError } = await supabase
+        .from('leads')
+        .insert([{ email }]);
+        
+      if (insertError) {
+        if (insertError.code === '23505') { // Unique violation
+          throw new Error('This email is already on our VIP list.');
+        }
+        throw insertError;
+      }
       
       setSuccess(true);
       localStorage.setItem('rk_popup_dismissed', 'true');
