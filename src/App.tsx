@@ -13,16 +13,23 @@ import Schedule from './components/Schedule';
 import Testimonials from './components/Testimonials';
 import Contact from './components/Contact';
 import Footer from './components/Footer';
+import SubscriptionPopup from './components/SubscriptionPopup';
 import { motion, useScroll, useSpring } from 'motion/react';
 import { BrowserRouter as Router, Routes, Route, Link } from 'react-router-dom';
 import JoinClub from './pages/JoinClub';
 import FreeTrial from './pages/FreeTrial';
 import ProgramDetail from './pages/ProgramDetail';
+import Login from './pages/Login';
+import Signup from './pages/Signup';
+import AdminLogin from './pages/AdminLogin';
+import AdminDashboard from './pages/AdminDashboard';
+import { AuthProvider } from './contexts/AuthContext';
 import { Dumbbell } from 'lucide-react';
 
 function Home() {
   return (
     <main>
+      <SubscriptionPopup />
       <Hero />
       <About />
       <Programs />
@@ -81,7 +88,8 @@ export default function App() {
 
   return (
     <Router>
-      <div className="relative">
+      <AuthProvider>
+        <div className="relative">
         {/* Progress Bar */}
         <motion.div 
           className="fixed top-0 left-0 right-0 h-1 bg-orange-accent z-[60] origin-left" 
@@ -105,8 +113,13 @@ export default function App() {
           <Route path="/join-club" element={<JoinClub />} />
           <Route path="/free-trial" element={<FreeTrial />} />
           <Route path="/programs/:slug" element={<ProgramDetail />} />
+          <Route path="/login" element={<Login />} />
+          <Route path="/signup" element={<Signup />} />
+          <Route path="/admin" element={<AdminLogin />} />
+          <Route path="/admin/dashboard" element={<AdminDashboard />} />
         </Routes>
       </div>
+      </AuthProvider>
     </Router>
   );
 }

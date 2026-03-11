@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react';
 import { Menu, X, Dumbbell } from 'lucide-react';
 import { motion, AnimatePresence } from 'motion/react';
 import { Link } from 'react-router-dom';
+import { useAuth } from '../contexts/AuthContext';
 
 const navLinks = [
   { name: 'Home', href: '/#' },
@@ -16,6 +17,7 @@ const navLinks = [
 export default function Header() {
   const [isOpen, setIsOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
+  const { user, profile, signOut } = useAuth();
 
   useEffect(() => {
     const handleScroll = () => {
@@ -53,9 +55,23 @@ export default function Header() {
                 {link.name}
               </a>
             ))}
-            <Link to="/join-club" className="bg-orange-accent text-black px-6 py-2 rounded-full font-bold text-sm hover:bg-white transition-colors">
-              JOIN NOW
-            </Link>
+            {user ? (
+              <div className="flex items-center gap-4">
+                <span className="text-sm font-medium text-white">Hi, {profile?.full_name || user.email?.split('@')[0]}</span>
+                <button onClick={() => signOut()} className="text-sm font-medium text-white/70 hover:text-orange-accent transition-colors">
+                  Sign Out
+                </button>
+              </div>
+            ) : (
+              <div className="flex items-center gap-4">
+                <Link to="/login" className="text-sm font-medium text-white/70 hover:text-orange-accent transition-colors">
+                  Sign In
+                </Link>
+                <Link to="/signup" className="bg-orange-accent text-black px-6 py-2 rounded-full font-bold text-sm hover:bg-white transition-colors">
+                  JOIN NOW
+                </Link>
+              </div>
+            )}
           </nav>
 
           {/* Mobile Menu Button */}
@@ -90,9 +106,26 @@ export default function Header() {
                   {link.name}
                 </a>
               ))}
-              <Link to="/join-club" className="w-full bg-orange-accent text-black py-3 rounded-xl font-bold hover:bg-white transition-colors text-center block">
-                JOIN NOW
-              </Link>
+              
+              {user ? (
+                <>
+                  <div className="py-2 text-sm font-medium text-white/70 border-t border-white/5">
+                    Signed in as {profile?.full_name || user.email}
+                  </div>
+                  <button onClick={() => { signOut(); setIsOpen(false); }} className="block w-full text-left text-lg font-medium text-white/70 hover:text-red-400 transition-colors">
+                    Sign Out
+                  </button>
+                </>
+              ) : (
+                <>
+                  <Link to="/login" onClick={() => setIsOpen(false)} className="block text-lg font-medium text-white/70 hover:text-orange-accent transition-colors">
+                    Sign In
+                  </Link>
+                  <Link to="/signup" onClick={() => setIsOpen(false)} className="w-full bg-orange-accent text-black py-3 rounded-xl font-bold hover:bg-white transition-colors text-center block mt-4">
+                    JOIN NOW
+                  </Link>
+                </>
+              )}
             </div>
           </motion.div>
         )}
