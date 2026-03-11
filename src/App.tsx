@@ -14,6 +14,7 @@ import Testimonials from './components/Testimonials';
 import Contact from './components/Contact';
 import Footer from './components/Footer';
 import SubscriptionPopup from './components/SubscriptionPopup';
+import AIChatbot from './components/AIChatbot';
 import { motion, useScroll, useSpring } from 'motion/react';
 import { BrowserRouter as Router, Routes, Route, Link } from 'react-router-dom';
 import JoinClub from './pages/JoinClub';
@@ -99,6 +100,7 @@ export default function App() {
         <Routes>
           <Route path="/" element={
             <>
+              <AIChatbot />
               <Header />
               <Home />
               <Footer />

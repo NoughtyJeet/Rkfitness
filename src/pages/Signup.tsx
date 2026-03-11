@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import React, { useState } from 'react';
 import { motion } from 'motion/react';
 import { supabase } from '../lib/supabase';
 import { useNavigate, Link } from 'react-router-dom';

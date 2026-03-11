@@ -1,0 +1,8 @@
+src/components/AIChatbot.tsx(51,34): error TS2503: Cannot find namespace 'React'.
+src/components/SubscriptionPopup.tsx(32,34): error TS2503: Cannot find namespace 'React'.
+src/lib/gemini.ts(3,28): error TS2339: Property 'env' does not exist on type 'ImportMeta'.
+src/lib/supabase.ts(3,33): error TS2339: Property 'env' does not exist on type 'ImportMeta'.
+src/lib/supabase.ts(4,37): error TS2339: Property 'env' does not exist on type 'ImportMeta'.
+src/pages/AdminLogin.tsx(16,38): error TS2503: Cannot find namespace 'React'.
+src/pages/Login.tsx(14,33): error TS2503: Cannot find namespace 'React'.
+src/pages/Signup.tsx(15,34): error TS2503: Cannot find namespace 'React'.
