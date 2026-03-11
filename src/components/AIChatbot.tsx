@@ -115,7 +115,7 @@ export default function AIChatbot() {
         { 
           id: (Date.now() + 1).toString(), 
           role: 'model', 
-          text: "I notice the VITE_GEMINI_API_KEY is missing from the environment variables! 😅 Please add it to your .env file or Vercel dashboard so I can properly answer your questions about RK Fitness!" 
+          text: "I notice the VITE_GEMINI_API_KEY is still missing from the built environment variables! 😅 If you just pasted it into Vercel, you *MUST* click 'Redeploy' in your Vercel dashboard so the app rebuilds with the new key!"
         }
       ]);
       setIsLoading(false);
