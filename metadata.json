@@ -1,0 +1,5 @@
+{
+  "name": "RK Fitness Center",
+  "description": "Premium gym in Miami offering strength training, cardio, and personal training. Transform your body at International Shopping Plaza.",
+  "requestFramePermissions": ["geolocation"]
+}
